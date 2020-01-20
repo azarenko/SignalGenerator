@@ -68,14 +68,14 @@
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.openToolStripMenuItem.Text = "Open";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.OpenToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.ExitToolStripMenuItem_Click);
             // 
@@ -141,6 +141,7 @@
             this._pictureBox.Location = new System.Drawing.Point(3, 16);
             this._pictureBox.Name = "_pictureBox";
             this._pictureBox.Size = new System.Drawing.Size(825, 480);
+            this._pictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this._pictureBox.TabIndex = 0;
             this._pictureBox.TabStop = false;
             // 

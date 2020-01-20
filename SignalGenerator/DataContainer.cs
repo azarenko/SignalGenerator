@@ -26,22 +26,27 @@ namespace SignalGenerator
             }
         }
 
-        public Bitmap GetPicture()
+        public Bitmap GetPicture(int w, int h)
         {
-            Bitmap img = new Bitmap(dataSet.Count * 10, (int)short.MaxValue * 4);
-            Graphics flagGraphics = Graphics.FromImage(img);
+            const int k = 64;
 
+            Bitmap img = new Bitmap(w, h);
+            Graphics imgGraphics = Graphics.FromImage(img);
 
+            Pen penA = new Pen(Color.Blue);
+            Pen penB = new Pen(Color.Red);
 
-            int red = 0;
-            int white = 11;
-
-            while (white <= 100)
+            for (int i = 1; i < img.Width; i++)
             {
-                flagGraphics.FillRectangle(Brushes.Red, 0, red, 200, 10);
-                flagGraphics.FillRectangle(Brushes.White, 0, white, 200, 10);
-                red += 20;
-                white += 20;
+                int y1 = dataSet[(i-1) / k].ChannelA;
+                int y2 = dataSet[i / k].ChannelA;
+
+                imgGraphics.DrawLine(penA, i - 1, y1, i, y2);
+
+                y1 = dataSet[(i - 1) / k].ChannelB;
+                y2 = dataSet[i / k].ChannelB;
+
+                imgGraphics.DrawLine(penB, i - 1, y1, i, y2);
             }
 
             return img;

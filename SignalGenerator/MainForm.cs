@@ -28,6 +28,7 @@ namespace SignalGenerator
             {
                 _filePath.Text = openFileDialog1.FileName;
                 _dataContainer = new DataContainer(_filePath.Text);
+                _pictureBox.Image = _dataContainer.GetPicture(_pictureBox.Width, _pictureBox.Height);
             }
         }
     }
