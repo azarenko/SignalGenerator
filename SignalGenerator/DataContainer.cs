@@ -37,19 +37,20 @@ namespace SignalGenerator
             Pen penB = new Pen(Color.Red, 2);
 
 
-            float kY = h / (float)(short.MaxValue * 4);
+            float kY = h / (float)(short.MaxValue * 8);
+            float offset = h / 8;
 
             for (int i = 1; i < img.Width; i++)
             {
-                int y1 = (int)((dataSet[(i-1) / k].ChannelA) * kY);
-                int y2 = (int)((dataSet[i / k].ChannelA) * kY);
+                int y1 = (int)((short.MaxValue - (dataSet[(i-1) / k].ChannelA)) * kY);
+                int y2 = (int)((short.MaxValue - (dataSet[i / k].ChannelA)) * kY);
 
-                imgGraphics.DrawLine(penA, i - 1, y1, i, y2);
+                imgGraphics.DrawLine(penA, i - 1, offset * 2 + y1, i, offset * 2 + y2);
 
-                y1 = (int)((dataSet[(i - 1) / k].ChannelB) * kY);
-                y2 = (int)((dataSet[i / k].ChannelB) * kY);
+                y1 = (int)((short.MaxValue - (dataSet[(i - 1) / k].ChannelB)) * kY);
+                y2 = (int)((short.MaxValue - (dataSet[i / k].ChannelB)) * kY);
 
-                imgGraphics.DrawLine(penB, i - 1, y1, i, y2);
+                imgGraphics.DrawLine(penB, i - 1, offset * 4 + y1, i, offset * 4 + y2);
             }
 
             return img;
