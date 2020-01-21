@@ -26,25 +26,28 @@ namespace SignalGenerator
             }
         }
 
-        public Bitmap GetPicture(int w, int h)
+        public Bitmap GetPicture(int h)
         {
-            const int k = 64;
+            const int k = 10;
 
-            Bitmap img = new Bitmap(w, h);
+            Bitmap img = new Bitmap(dataSet.Count * k, h);
             Graphics imgGraphics = Graphics.FromImage(img);
 
-            Pen penA = new Pen(Color.Blue);
-            Pen penB = new Pen(Color.Red);
+            Pen penA = new Pen(Color.Blue, 2);
+            Pen penB = new Pen(Color.Red, 2);
+
+
+            float kY = h / (float)(short.MaxValue * 4);
 
             for (int i = 1; i < img.Width; i++)
             {
-                int y1 = dataSet[(i-1) / k].ChannelA;
-                int y2 = dataSet[i / k].ChannelA;
+                int y1 = (int)((dataSet[(i-1) / k].ChannelA) * kY);
+                int y2 = (int)((dataSet[i / k].ChannelA) * kY);
 
                 imgGraphics.DrawLine(penA, i - 1, y1, i, y2);
 
-                y1 = dataSet[(i - 1) / k].ChannelB;
-                y2 = dataSet[i / k].ChannelB;
+                y1 = (int)((dataSet[(i - 1) / k].ChannelB) * kY);
+                y2 = (int)((dataSet[i / k].ChannelB) * kY);
 
                 imgGraphics.DrawLine(penB, i - 1, y1, i, y2);
             }
