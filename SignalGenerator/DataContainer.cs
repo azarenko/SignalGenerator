@@ -55,6 +55,106 @@ namespace SignalGenerator
 
             return img;
         }
+
+        public byte[] GetSound(int freq)
+        {
+            
+        }
+
+        private 
+
+        private byte[] GenerateWav(byte[] left, byte[] right)
+        {
+            const int mNumChannels = 2;
+            const int mSampleRateHz = 44100;
+            const int mBitsPerSample = 16;
+
+            MemoryStream mMemoryStream = new MemoryStream();
+
+            char[] mWAVHeader = new char[4];
+            char[] mRIFFType = new char[4];
+            "RIFF".CopyTo(0, mWAVHeader, 0, 4);
+            "WAVE".CopyTo(0, mRIFFType, 0, 4);
+
+            // RIFF chunk (12 bytes total)
+            // Write the chunk IDD ("RIFF", 4 bytes)
+            byte[] buffer = StrToByteArray("RIFF");
+            mMemoryStream.Write(buffer, 0, 4);      // gets stuck here..won't write to the stream
+            if (mWAVHeader == null)
+                mWAVHeader = new char[4];
+            "RIFF".CopyTo(0, mWAVHeader, 0, 4);
+            // File size size (4 bytes) - This will be 0 for now
+            Array.Clear(buffer, 0, buffer.GetLength(0));
+            mMemoryStream.Write(buffer, 0, 4);
+            // RIFF type ("WAVE")
+            buffer = StrToByteArray("WAVE");
+            mMemoryStream.Write(buffer, 0, 4);
+            if (mRIFFType == null)
+                mRIFFType = new char[4];
+            "WAVE".CopyTo(0, mRIFFType, 0, 4);
+
+            // Format chunk (24 bytes total)
+            // "fmt " (ASCII characters)
+            buffer = StrToByteArray("fmt ");
+            mMemoryStream.Write(buffer, 0, 4);
+            // Length of format chunk (always 16, 4 bytes)
+            Array.Clear(buffer, 0, buffer.GetLength(0));
+            buffer[0] = 16;
+            if (!BitConverter.IsLittleEndian)
+                Array.Reverse(buffer);
+            mMemoryStream.Write(buffer, 0, 4);
+            // 2 bytes (always 1)
+            Array.Clear(buffer, 0, buffer.GetLength(0));
+            buffer[0] = 1;
+            if (!BitConverter.IsLittleEndian)
+                Array.Reverse(buffer, 0, 2);
+            mMemoryStream.Write(buffer, 0, 2);
+            // # of channels (2 bytes)
+            Array.Clear(buffer, 0, buffer.GetLength(0));
+            buffer[0] = mNumChannels;
+            if (!BitConverter.IsLittleEndian)
+                Array.Reverse(buffer, 0, 2);
+            mMemoryStream.Write(buffer, 0, 2);
+            // Sample rate (4 bytes)
+            buffer = BitConverter.GetBytes(mSampleRateHz);
+            if (!BitConverter.IsLittleEndian)
+                Array.Reverse(buffer);
+            mMemoryStream.Write(buffer, 0, 4);
+            // Calculate the # of bytes per sample: 1=8 bit Mono, 2=8 bit Stereo or
+            // 16 bit Mono, 4=16 bit Stereo
+            short bytesPerSample = (short)((mBitsPerSample / 8) * 2);
+            // Write the # of bytes per second (4 bytes)
+            int mBytesPerSec = mSampleRateHz * bytesPerSample;
+            buffer = BitConverter.GetBytes(mBytesPerSec);
+            if (!BitConverter.IsLittleEndian)
+                Array.Reverse(buffer);
+            mMemoryStream.Write(buffer, 0, 4);
+            // Write the # of bytes per sample (2 bytes)
+            byte[] buffer_2bytes = BitConverter.GetBytes(bytesPerSample);
+            if (!BitConverter.IsLittleEndian)
+                Array.Reverse(buffer_2bytes);
+            mMemoryStream.Write(buffer_2bytes, 0, 2);
+            // Bits per sample (2 bytes)
+            buffer_2bytes = BitConverter.GetBytes(mBitsPerSample);
+            if (!BitConverter.IsLittleEndian)
+                Array.Reverse(buffer_2bytes);
+            mMemoryStream.Write(buffer_2bytes, 0, 2);
+
+            // Data chunk
+            // "data" (ASCII characters)
+            buffer = StrToByteArray("data");
+            mMemoryStream.Write(buffer, 0, 4);
+            // Length of data to follow (4 bytes) - This will be 0 for now
+            Array.Clear(buffer, 0, buffer.GetLength(0));
+            mMemoryStream.Write(buffer, 0, 4);
+            mDataSizeBytes = 0;
+        }
+
+        private static byte[] StrToByteArray(String pStr)
+        {
+            System.Text.ASCIIEncoding encoding = new System.Text.ASCIIEncoding();
+            return encoding.GetBytes(pStr);
+        }
     }
 
     struct DataItem
