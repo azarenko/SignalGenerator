@@ -1,6 +1,5 @@
 D:\projects\SignalGenerator\SignalGenerator\bin\Debug\SignalGenerator.exe
 D:\projects\SignalGenerator\SignalGenerator\bin\Debug\SignalGenerator.pdb
-D:\projects\SignalGenerator\SignalGenerator\obj\Debug\SignalGenerator.csprojAssemblyReference.cache
 D:\projects\SignalGenerator\SignalGenerator\obj\Debug\SignalGenerator.MainForm.resources
 D:\projects\SignalGenerator\SignalGenerator\obj\Debug\SignalGenerator.Properties.Resources.resources
 D:\projects\SignalGenerator\SignalGenerator\obj\Debug\SignalGenerator.csproj.GenerateResource.cache
