@@ -37,21 +37,24 @@
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this._stop = new System.Windows.Forms.Button();
+            this._start = new System.Windows.Forms.Button();
+            this._rpm = new System.Windows.Forms.NumericUpDown();
+            this.label1 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this._pictureBox = new System.Windows.Forms.PictureBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this._rpm = new System.Windows.Forms.NumericUpDown();
-            this._start = new System.Windows.Forms.Button();
-            this._stop = new System.Windows.Forms.Button();
+            this._deviceName = new System.Windows.Forms.ComboBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this._rpm)).BeginInit();
             this.groupBox2.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this._pictureBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this._rpm)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -124,6 +127,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label2);
+            this.groupBox1.Controls.Add(this._deviceName);
             this.groupBox1.Controls.Add(this._stop);
             this.groupBox1.Controls.Add(this._start);
             this.groupBox1.Controls.Add(this._rpm);
@@ -135,6 +140,63 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Play settings";
+            // 
+            // _stop
+            // 
+            this._stop.Location = new System.Drawing.Point(410, 17);
+            this._stop.Name = "_stop";
+            this._stop.Size = new System.Drawing.Size(75, 23);
+            this._stop.TabIndex = 3;
+            this._stop.Text = "Stop";
+            this._stop.UseVisualStyleBackColor = true;
+            this._stop.Click += new System.EventHandler(this._stop_Click);
+            // 
+            // _start
+            // 
+            this._start.Location = new System.Drawing.Point(329, 17);
+            this._start.Name = "_start";
+            this._start.Size = new System.Drawing.Size(75, 23);
+            this._start.TabIndex = 2;
+            this._start.Text = "Start";
+            this._start.UseVisualStyleBackColor = true;
+            this._start.Click += new System.EventHandler(this._start_Click);
+            // 
+            // _rpm
+            // 
+            this._rpm.Increment = new decimal(new int[] {
+            25,
+            0,
+            0,
+            0});
+            this._rpm.Location = new System.Drawing.Point(239, 20);
+            this._rpm.Maximum = new decimal(new int[] {
+            15000,
+            0,
+            0,
+            0});
+            this._rpm.Minimum = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+            this._rpm.Name = "_rpm";
+            this._rpm.ReadOnly = true;
+            this._rpm.Size = new System.Drawing.Size(84, 20);
+            this._rpm.TabIndex = 1;
+            this._rpm.Value = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(202, 22);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(31, 13);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "RPM";
             // 
             // groupBox2
             // 
@@ -170,63 +232,27 @@
             this._pictureBox.TabIndex = 0;
             this._pictureBox.TabStop = false;
             // 
-            // label1
+            // _deviceName
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(9, 21);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(31, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "RPM";
+            this._deviceName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this._deviceName.FormattingEnabled = true;
+            this._deviceName.Location = new System.Drawing.Point(77, 19);
+            this._deviceName.Name = "_deviceName";
+            this._deviceName.Size = new System.Drawing.Size(121, 21);
+            this._deviceName.TabIndex = 4;
             // 
-            // _rpm
+            // label2
             // 
-            this._rpm.Increment = new decimal(new int[] {
-            25,
-            0,
-            0,
-            0});
-            this._rpm.Location = new System.Drawing.Point(46, 19);
-            this._rpm.Maximum = new decimal(new int[] {
-            15000,
-            0,
-            0,
-            0});
-            this._rpm.Minimum = new decimal(new int[] {
-            50,
-            0,
-            0,
-            0});
-            this._rpm.Name = "_rpm";
-            this._rpm.ReadOnly = true;
-            this._rpm.Size = new System.Drawing.Size(84, 20);
-            this._rpm.TabIndex = 1;
-            this._rpm.Value = new decimal(new int[] {
-            50,
-            0,
-            0,
-            0});
-            this._rpm.ValueChanged += new System.EventHandler(this._rpm_ValueChanged);
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(5, 22);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(66, 13);
+            this.label2.TabIndex = 5;
+            this.label2.Text = "FTDI device";
             // 
-            // _start
+            // backgroundWorker1
             // 
-            this._start.Location = new System.Drawing.Point(136, 16);
-            this._start.Name = "_start";
-            this._start.Size = new System.Drawing.Size(75, 23);
-            this._start.TabIndex = 2;
-            this._start.Text = "Start";
-            this._start.UseVisualStyleBackColor = true;
-            this._start.Click += new System.EventHandler(this._start_Click);
-            // 
-            // _stop
-            // 
-            this._stop.Location = new System.Drawing.Point(217, 16);
-            this._stop.Name = "_stop";
-            this._stop.Size = new System.Drawing.Size(75, 23);
-            this._stop.TabIndex = 3;
-            this._stop.Text = "Stop";
-            this._stop.UseVisualStyleBackColor = true;
-            this._stop.Click += new System.EventHandler(this._stop_Click);
+            this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
             // 
             // MainForm
             // 
@@ -239,6 +265,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "MainForm";
             this.Text = "Signal generator";
+            this.Load += new System.EventHandler(this.MainForm_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.statusStrip1.ResumeLayout(false);
@@ -247,12 +274,12 @@
             this.tableLayoutPanel1.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this._rpm)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this._pictureBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this._rpm)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -276,6 +303,9 @@
         private System.Windows.Forms.Button _start;
         private System.Windows.Forms.NumericUpDown _rpm;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ComboBox _deviceName;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
     }
 }
 
