@@ -37,6 +37,8 @@
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this._deviceName = new System.Windows.Forms.ComboBox();
             this._stop = new System.Windows.Forms.Button();
             this._start = new System.Windows.Forms.Button();
             this._rpm = new System.Windows.Forms.NumericUpDown();
@@ -44,8 +46,6 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this._pictureBox = new System.Windows.Forms.PictureBox();
-            this._deviceName = new System.Windows.Forms.ComboBox();
-            this.label2 = new System.Windows.Forms.Label();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -141,6 +141,28 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Play settings";
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(5, 22);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(48, 13);
+            this.label2.TabIndex = 5;
+            this.label2.Text = "LPT port";
+            // 
+            // _deviceName
+            // 
+            this._deviceName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this._deviceName.FormattingEnabled = true;
+            this._deviceName.Items.AddRange(new object[] {
+            "LPT1",
+            "LPT2",
+            "LPT3"});
+            this._deviceName.Location = new System.Drawing.Point(77, 19);
+            this._deviceName.Name = "_deviceName";
+            this._deviceName.Size = new System.Drawing.Size(121, 21);
+            this._deviceName.TabIndex = 4;
+            // 
             // _stop
             // 
             this._stop.Location = new System.Drawing.Point(410, 17);
@@ -231,24 +253,6 @@
             this._pictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this._pictureBox.TabIndex = 0;
             this._pictureBox.TabStop = false;
-            // 
-            // _deviceName
-            // 
-            this._deviceName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this._deviceName.FormattingEnabled = true;
-            this._deviceName.Location = new System.Drawing.Point(77, 19);
-            this._deviceName.Name = "_deviceName";
-            this._deviceName.Size = new System.Drawing.Size(121, 21);
-            this._deviceName.TabIndex = 4;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(5, 22);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(66, 13);
-            this.label2.TabIndex = 5;
-            this.label2.Text = "FTDI device";
             // 
             // backgroundWorker1
             // 

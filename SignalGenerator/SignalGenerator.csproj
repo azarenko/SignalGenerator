@@ -12,7 +12,7 @@
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <PlatformTarget>x86</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -31,10 +31,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="FTD2XX_NET, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>driver\FTD2XX_NET.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
@@ -50,6 +46,7 @@
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ParallelPort.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="MainForm.resx">
@@ -64,6 +61,8 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="InpOutBinaries_1501\Win32\inpout32.lib" />
+    <None Include="InpOutBinaries_1501\x64\inpoutx64.lib" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -74,11 +73,18 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <Content Include="driver\FTD2XX_NET.dll" />
-    <Content Include="driver\FTD2XX_NET.XML" />
-    <Content Include="driver\License.txt" />
+    <Content Include="inpout32.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="InpOutBinaries_1501\DLPortIO.txt" />
+    <Content Include="InpOutBinaries_1501\license.txt" />
+    <Content Include="InpOutBinaries_1501\ReadMe.txt" />
+    <Content Include="InpOutBinaries_1501\Win32\inpout32.dll" />
+    <Content Include="InpOutBinaries_1501\Win32\inpout32.h" />
+    <Content Include="InpOutBinaries_1501\Win32\InstallDriver.exe" />
+    <Content Include="InpOutBinaries_1501\x64\inpout32.h" />
+    <Content Include="InpOutBinaries_1501\x64\inpoutx64.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

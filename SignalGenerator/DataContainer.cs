@@ -8,7 +8,7 @@ namespace SignalGenerator
 {
     class DataContainer
     {
-        public List<DataItem> dataSet = new List<DataItem>();
+        public List<byte> dataSet = new List<byte>();
 
         public DataContainer(string filePath)
         {
@@ -17,17 +17,18 @@ namespace SignalGenerator
                 while (!sr.EndOfStream)
                 {
                     string[] data = sr.ReadLine().Split(',');
-                    dataSet.Add(new DataItem()
-                    {
-                        Channel0 = byte.Parse(data[0]),
-                        Channel1 = byte.Parse(data[1]),
-                        Channel2 = byte.Parse(data[2]),
-                        Channel3 = byte.Parse(data[3]),
-                        Channel4 = byte.Parse(data[4]),
-                        Channel5 = byte.Parse(data[5]),
-                        Channel6 = byte.Parse(data[6]),
-                        Channel7 = byte.Parse(data[7]),
-                    });
+                    int b = 0;
+
+                    b += byte.Parse(data[0]);
+                    b += byte.Parse(data[1]) << 1;
+                    b += byte.Parse(data[2]) << 2;
+                    b += byte.Parse(data[3]) << 3;
+                    b += byte.Parse(data[4]) << 4;
+                    b += byte.Parse(data[5]) << 5;
+                    b += byte.Parse(data[6]) << 6;
+                    b += byte.Parse(data[7]) << 7;
+
+                    dataSet.Add((byte)b);
                 }
             }
         }
@@ -52,60 +53,48 @@ namespace SignalGenerator
 
             for (int i = 1; i < img.Width; i++)
             {
-                int y1 = (int)(kY - (dataSet[(i-1) / k].Channel0 * kY));
-                int y2 = (int)(kY - (dataSet[i / k].Channel0 * kY));
+                int y1 = (int)(kY - ((dataSet[(i-1) / k] & 0x1) * kY));
+                int y2 = (int)(kY - ((dataSet[i / k] & 0x1) * kY));
 
                 imgGraphics.DrawLine(pen0, i - 1,  y1, i, y2);
 
-                y1 = (int)(kY - (dataSet[(i - 1) / k].Channel1 * kY));
-                y2 = (int)(kY - (dataSet[i / k].Channel1 * kY));
+                y1 = (int)(kY - (((dataSet[(i - 1) / k] >> 1) & 0x1) * kY));
+                y2 = (int)(kY - (((dataSet[i / k] >> 1) & 0x1) * kY));
 
                 imgGraphics.DrawLine(pen1, i - 1, kY * 1 + y1, i, kY * 1 + y2);
 
-                y1 = (int)(kY - (dataSet[(i - 1) / k].Channel2 * kY));
-                y2 = (int)(kY - (dataSet[i / k].Channel2 * kY));
+                y1 = (int)(kY - (((dataSet[(i - 1) / k] >> 2) & 0x1) * kY));
+                y2 = (int)(kY - (((dataSet[i / k] >> 2) & 0x1) * kY));
 
                 imgGraphics.DrawLine(pen2, i - 1, kY * 2 + y1, i, kY * 2 + y2);
 
-                y1 = (int)(kY - (dataSet[(i - 1) / k].Channel3 * kY));
-                y2 = (int)(kY - (dataSet[i / k].Channel3 * kY));
+                y1 = (int)(kY - (((dataSet[(i - 1) / k] >> 3) & 0x1) * kY));
+                y2 = (int)(kY - (((dataSet[i / k] >> 3) & 0x1) * kY));
 
                 imgGraphics.DrawLine(pen3, i - 1, kY * 3 + y1, i, kY * 3 + y2);
 
-                y1 = (int)(kY - (dataSet[(i - 1) / k].Channel4 * kY));
-                y2 = (int)(kY - (dataSet[i / k].Channel4 * kY));
+                y1 = (int)(kY - (((dataSet[(i - 1) / k] >> 4) & 0x1) * kY));
+                y2 = (int)(kY - (((dataSet[i / k] >> 4) & 0x1) * kY));
 
                 imgGraphics.DrawLine(pen4, i - 1, kY * 4 + y1, i, kY * 4 + y2);
 
-                y1 = (int)(kY - (dataSet[(i - 1) / k].Channel5 * kY));
-                y2 = (int)(kY - (dataSet[i / k].Channel5 * kY));
+                y1 = (int)(kY - (((dataSet[(i - 1) / k] >> 5) & 0x1) * kY));
+                y2 = (int)(kY - (((dataSet[i / k] >> 5) & 0x1) * kY));
 
                 imgGraphics.DrawLine(pen5, i - 1, kY * 5 + y1, i, kY * 5 + y2);
 
-                y1 = (int)(kY - (dataSet[(i - 1) / k].Channel6 * kY));
-                y2 = (int)(kY - (dataSet[i / k].Channel6 * kY));
+                y1 = (int)(kY - (((dataSet[(i - 1) / k] >> 6) & 0x1) * kY));
+                y2 = (int)(kY - (((dataSet[i / k] >> 6) & 0x1) * kY));
 
                 imgGraphics.DrawLine(pen6, i - 1, kY * 6 + y1, i, kY * 6 + y2);
 
-                y1 = (int)(kY - (dataSet[(i - 1) / k].Channel7 * kY));
-                y2 = (int)(kY - (dataSet[i / k].Channel7 * kY));
+                y1 = (int)(kY - (((dataSet[(i - 1) / k] >> 7) & 0x1) * kY));
+                y2 = (int)(kY - (((dataSet[i / k] >> 7) & 0x1) * kY));
 
                 imgGraphics.DrawLine(pen7, i - 1, kY * 7 + y1, i, kY * 7 + y2);
             }
 
             return img;
         }
-    }
-
-    struct DataItem
-    {
-        public byte Channel0;
-        public byte Channel1;
-        public byte Channel2;
-        public byte Channel3;
-        public byte Channel4;
-        public byte Channel5;
-        public byte Channel6;
-        public byte Channel7;
     }
 }
